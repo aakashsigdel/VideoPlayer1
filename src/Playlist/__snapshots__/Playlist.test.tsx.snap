@@ -1,9 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Playlist /> should render correctly 1`] = `
-<ul>
-  <div />
-  <div />
-  <div />
-</ul>
+<section>
+  <ul>
+    <div />
+    <div />
+    <div />
+  </ul>
+  <button
+    onClick={[MockFunction]}
+  >
+    Add to playlist
+  </button>
+</section>
 `;
