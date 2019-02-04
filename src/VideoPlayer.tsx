@@ -15,6 +15,7 @@ export interface IVideoPlayerState {
   videos: IVideo[]
   currentVideo: number // index of the video array
   isOpenAddToPlaylist: boolean
+  shouldAutoPlay: boolean
 }
 
 export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
@@ -22,6 +23,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     videos: getVideos(), // TODO: change this
     currentVideo: 0,
     isOpenAddToPlaylist: false,
+    shouldAutoPlay: false,
   }
 
   addVideo(video: IVideo): void {
@@ -39,8 +41,18 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     })
   }
 
+  setAutoPlay = () => {
+    const { shouldAutoPlay } = this.state
+    if (!shouldAutoPlay) {
+      this.setState({
+        shouldAutoPlay: true,
+      })
+    }
+  }
+
   next = (): void => {
     const { currentVideo, videos } = this.state
+    this.setAutoPlay()
     if (!videos.length) {
       return
     }
@@ -49,10 +61,14 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
   }
 
   render() {
-    const { videos, currentVideo } = this.state
+    const { videos, currentVideo, shouldAutoPlay } = this.state
     return (
       <main>
-        <PlayerRoot videoUrl={videos[currentVideo].videoUrl} next={this.next} />
+        <PlayerRoot
+          videoUrl={videos[currentVideo].videoUrl}
+          next={this.next}
+          autoPlay={shouldAutoPlay}
+        />
         <Playlist videos={videos}>
           {(video, videoNumber) => (
             <PlaylistItem

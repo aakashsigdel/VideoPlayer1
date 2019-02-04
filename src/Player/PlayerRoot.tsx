@@ -9,6 +9,7 @@ export interface IPlayerRootProps {
   videoUrl: string
   posterUrl?: string
   next?: () => void
+  autoPlay?: boolean
 }
 
 export const PlayerRoot: React.FunctionComponent<IPlayerRootProps> = ({
@@ -17,9 +18,11 @@ export const PlayerRoot: React.FunctionComponent<IPlayerRootProps> = ({
   height = DEFAULT_PLAYER_HEIGHT,
   width = DEFAULT_PLAYER_WIDTH,
   next,
+  autoPlay,
 }) => (
   <video
     controls
+    autoPlay={autoPlay}
     height={height}
     width={width}
     src={videoUrl}

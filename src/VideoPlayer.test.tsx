@@ -38,9 +38,10 @@ describe('<VideoPlayer />', () => {
   })
 
   it('should not change the video if there is no videos on the list', () => {
+    wrapper.setState({ videos: [] })
     const current = wrapper.state().currentVideo
     videoPlayer.next()
-    expect(wrapper.state().currentVideo).toBe(0)
+    expect(wrapper.state().currentVideo).toBe(current)
   })
 
   it('should go to the first video when next is called on last video', () => {
