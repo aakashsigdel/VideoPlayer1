@@ -9,4 +9,6 @@ export interface IPlaylistItemProps {
 
 export const PlaylistItem: React.FunctionComponent<IPlaylistItemProps> = ({
   song,
-}) => <div>{song.title}</div>
+  songNumber,
+  onSelectSong,
+}) => <li onClick={() => onSelectSong(songNumber)}>{song.title}</li>

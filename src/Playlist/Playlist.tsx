@@ -10,4 +10,4 @@ export interface IPlaylistProps {
 export const Playlist: React.FunctionComponent<IPlaylistProps> = ({
   songs,
   children,
-}) => <React.Fragment>{songs.map(children)}</React.Fragment>
+}) => <ul>{songs.map(children)}</ul>
