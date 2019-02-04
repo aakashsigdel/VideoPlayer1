@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PlayerRoot /> should render correctly 1`] = `
+<video
+  height={500}
+  poster="testUrl"
+  src="testUrl"
+  width={620}
+>
+  Sorry your browser doesn't support HTML5 videos!
+</video>
+`;

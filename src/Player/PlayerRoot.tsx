@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-const DEFAULT_PLAYER_HEIGHT = 500
-const DEFAULT_PLAYER_WIDTH = 620
+export const DEFAULT_PLAYER_HEIGHT = 500
+export const DEFAULT_PLAYER_WIDTH = 620
 
 export interface IPlayerRootProps {
   width?: number
