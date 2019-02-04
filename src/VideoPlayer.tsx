@@ -3,6 +3,7 @@ import * as React from 'react'
 import { PlayerRoot } from './Player/PlayerRoot'
 import { Playlist } from './Playlist/Playlist'
 import { PlaylistItem } from './Playlist/PlaylistItem'
+import { AddToPlaylist } from './Playlist/AddToPlaylist'
 import { getVideos } from './factory'
 
 export interface IVideo {
@@ -26,7 +27,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     shouldAutoPlay: false,
   }
 
-  addVideo(video: IVideo): void {
+  addVideo = (video: IVideo): void => {
     this.setState({
       videos: [...this.state.videos, video],
     })
@@ -60,8 +61,25 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     this.setCurrentVideo(nextVideo)
   }
 
+  openAddToPlaylist = (): void => {
+    this.setState({
+      isOpenAddToPlaylist: true,
+    })
+  }
+
+  closeAddToPlaylist = (): void => {
+    this.setState({
+      isOpenAddToPlaylist: false,
+    })
+  }
+
   render() {
-    const { videos, currentVideo, shouldAutoPlay } = this.state
+    const {
+      videos,
+      currentVideo,
+      shouldAutoPlay,
+      isOpenAddToPlaylist,
+    } = this.state
     return (
       <main>
         <PlayerRoot
@@ -69,7 +87,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
           next={this.next}
           autoPlay={shouldAutoPlay}
         />
-        <Playlist videos={videos}>
+        <Playlist videos={videos} onClickAdd={this.openAddToPlaylist}>
           {(video, videoNumber) => (
             <PlaylistItem
               video={video}
@@ -79,6 +97,12 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
             />
           )}
         </Playlist>
+        {isOpenAddToPlaylist && (
+          <AddToPlaylist
+            onClickAdd={this.addVideo}
+            onClickCancel={this.closeAddToPlaylist}
+          />
+        )}
       </main>
     )
   }
