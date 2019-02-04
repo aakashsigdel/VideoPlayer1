@@ -3,8 +3,10 @@ import { ISong } from '../VideoPlayer'
 
 export interface IPlaylistItemProps {
   song: ISong
+  songNumber: number
+  onSelectSong: (songNumber: number) => void
 }
 
-export const IPlaylistItem: React.FunctionComponent<IPlaylistItemProps> = ({
+export const PlaylistItem: React.FunctionComponent<IPlaylistItemProps> = ({
   song,
 }) => <div>{song.title}</div>

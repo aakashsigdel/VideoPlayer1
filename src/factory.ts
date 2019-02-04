@@ -1,7 +1,8 @@
 export const getSong = (suffix: string = '1') => ({
   title: `testSong${suffix}`,
   artist: `testArtist${suffix}`,
-  videoUrl: `testUrl${suffix}`,
+  videoUrl:
+    'http://mirrors.standaloneinstaller.com/video-sample/dolbycanyon.m4v',
 })
 
 export const getSongs = () => {
