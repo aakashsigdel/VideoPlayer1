@@ -8,6 +8,7 @@ export interface IPlayerRootProps {
   height?: number
   videoUrl: string
   posterUrl?: string
+  next?: () => void
 }
 
 export const PlayerRoot: React.FunctionComponent<IPlayerRootProps> = ({
@@ -15,6 +16,7 @@ export const PlayerRoot: React.FunctionComponent<IPlayerRootProps> = ({
   posterUrl,
   height = DEFAULT_PLAYER_HEIGHT,
   width = DEFAULT_PLAYER_WIDTH,
+  next,
 }) => (
   <video
     controls
@@ -22,6 +24,7 @@ export const PlayerRoot: React.FunctionComponent<IPlayerRootProps> = ({
     width={width}
     src={videoUrl}
     poster={posterUrl}
+    onEnded={next}
   >
     Sorry your browser doesn't support HTML5 videos!
   </video>

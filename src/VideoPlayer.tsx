@@ -52,7 +52,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     const { songs, currentSong } = this.state
     return (
       <main>
-        <PlayerRoot videoUrl={songs[currentSong].videoUrl} />
+        <PlayerRoot videoUrl={songs[currentSong].videoUrl} next={this.next} />
         <Playlist songs={songs}>
           {(song, songNumber) => (
             <PlaylistItem
