@@ -1,13 +1,13 @@
 import * as React from 'react'
 
-import { ISong } from '../VideoPlayer'
+import { IVideo } from '../VideoPlayer'
 
 export interface IPlaylistProps {
-  songs: ISong[]
-  children: (song: ISong, songNumber: number) => JSX.Element
+  videos: IVideo[]
+  children: (video: IVideo, videoNumber: number) => JSX.Element
 }
 
 export const Playlist: React.FunctionComponent<IPlaylistProps> = ({
-  songs,
+  videos,
   children,
-}) => <ul>{songs.map(children)}</ul>
+}) => <ul>{videos.map(children)}</ul>

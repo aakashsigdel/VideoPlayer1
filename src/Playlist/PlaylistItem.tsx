@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { ISong } from '../VideoPlayer'
+import { IVideo } from '../VideoPlayer'
 
 export interface IPlaylistItemProps {
-  song: ISong
-  songNumber: number
-  onSelectSong: (songNumber: number) => void
+  video: IVideo
+  videoNumber: number
+  onSelectVideo: (videoNumber: number) => void
 }
 
 export const PlaylistItem: React.FunctionComponent<IPlaylistItemProps> = ({
-  song,
-  songNumber,
-  onSelectSong,
-}) => <li onClick={() => onSelectSong(songNumber)}>{song.title}</li>
+  video,
+  videoNumber,
+  onSelectVideo,
+}) => <li onClick={() => onSelectVideo(videoNumber)}>{video.title}</li>
