@@ -3,24 +3,7 @@ import { shallow, ShallowWrapper } from 'enzyme'
 import { create } from 'react-test-renderer'
 
 import { VideoPlayer, IVideoPlayerState } from './VideoPlayer'
-
-const sampleSongs = [
-  {
-    title: 'testSong1',
-    artist: 'testArtist1',
-    videoUrl: 'testUrl1',
-  },
-  {
-    title: 'testSong2',
-    artist: 'testArtist2',
-    videoUrl: 'testUrl2',
-  },
-  {
-    title: 'testSong3',
-    artist: 'testArtist3',
-    videoUrl: 'testUrl3',
-  },
-]
+import { getSongs, getSong } from './factory'
 
 describe('<VideoPlayer />', () => {
   let wrapper: ShallowWrapper<{}, IVideoPlayerState>
@@ -42,14 +25,16 @@ describe('<VideoPlayer />', () => {
   })
 
   it('should set current song when setCurrentSong is called', () => {
+    const sampleSongs = getSongs()
     wrapper.setState({ songs: sampleSongs })
     videoPlayer.setCurrentSong(2)
     expect(wrapper.state().currentSong).toBe(2)
   })
 
   it('should add song to the playlist wieh addSong is called', () => {
-    videoPlayer.addSong(sampleSongs[0])
-    expect(wrapper.state().songs).toContainEqual(sampleSongs[0])
+    const song = getSong()
+    videoPlayer.addSong(song)
+    expect(wrapper.state().songs).toContainEqual(song)
   })
 
   it('should not change the song if there is no songs on the list', () => {
@@ -59,6 +44,7 @@ describe('<VideoPlayer />', () => {
   })
 
   it('should go to the first song when next is called on last song', () => {
+    const sampleSongs = getSongs()
     wrapper.setState({
       songs: sampleSongs,
       currentSong: sampleSongs.length - 1,
@@ -68,6 +54,7 @@ describe('<VideoPlayer />', () => {
   })
 
   it('should currentSong to next song on the list when next is called', () => {
+    const sampleSongs = getSongs()
     wrapper.setState({ songs: sampleSongs })
     const current = wrapper.state().currentSong
     videoPlayer.next()
