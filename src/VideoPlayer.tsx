@@ -17,10 +17,28 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     currentSong: 0,
   }
 
-  setCurrentSong = (index: number) => {
+  addSong(song: ISong): void {
+    this.setState({
+      songs: [...this.state.songs, song],
+    })
+  }
+
+  setCurrentSong = (index: number): void => {
+    if (index >= this.state.songs.length) {
+      return
+    }
     this.setState({
       currentSong: index,
     })
+  }
+
+  next = (): void => {
+    const { currentSong, songs } = this.state
+    if (!songs.length) {
+      return
+    }
+    const nextSong = (currentSong + 1) % songs.length
+    this.setCurrentSong(nextSong)
   }
 
   render() {
