@@ -1,0 +1,23 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.video {
+  background-color: #000;
+}
+
+.controls {
+  height: 48px;
+  width: 620px;
+  transform: translateY(-48px);
+  display: flex;
+  align-items: center;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.55));
+}
+
+.stationaryControls {
+  display: flex;
+  width: 150px;
+  justify-content: space-around;
+}

@@ -3,7 +3,9 @@ import * as React from 'react'
 import { PlayPause } from './PlayPause'
 import { NextPrevious } from './NextPrevious'
 
-export const DEFAULT_PLAYER_HEIGHT = 500
+import styles from './PlayerRoot.module.css'
+
+export const DEFAULT_PLAYER_HEIGHT = 348
 export const DEFAULT_PLAYER_WIDTH = 620
 
 export interface IPlayerRootState {
@@ -58,7 +60,7 @@ export class PlayerRoot extends React.Component<
     const { isPlaying } = this.state
 
     return (
-      <section>
+      <section className={styles.root}>
         <video
           ref={this.player}
           autoPlay={autoPlay}
@@ -67,16 +69,20 @@ export class PlayerRoot extends React.Component<
           src={videoUrl}
           poster={posterUrl}
           onEnded={next}
+          className={styles.video}
         >
           Sorry your browser doesn't support HTML5 videos!
         </video>
-        <div>
-          <PlayPause
-            isPlaying={isPlaying}
-            togglePlayPause={this.togglePlayPause}
-          />
-          <NextPrevious type="next" onClick={next} />
-          <NextPrevious type="prev" onClick={previous} />
+        <div className={styles.overlay} />
+        <div className={styles.controls}>
+          <div className={styles.stationaryControls}>
+            <NextPrevious type="prev" onClick={previous} />
+            <PlayPause
+              isPlaying={isPlaying}
+              togglePlayPause={this.togglePlayPause}
+            />
+            <NextPrevious type="next" onClick={next} />
+          </div>
         </div>
       </section>
     )
