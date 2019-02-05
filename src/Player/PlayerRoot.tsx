@@ -1,8 +1,13 @@
 import * as React from 'react'
 
+import { PlayPause } from './PlayPause'
+
 export const DEFAULT_PLAYER_HEIGHT = 500
 export const DEFAULT_PLAYER_WIDTH = 620
 
+export interface IPlayerRootState {
+  isPlaying: boolean
+}
 export interface IPlayerRootProps {
   width?: number
   height?: number
@@ -12,7 +17,32 @@ export interface IPlayerRootProps {
   autoPlay?: boolean
 }
 
-export class PlayerRoot extends React.Component<IPlayerRootProps> {
+export class PlayerRoot extends React.Component<
+  IPlayerRootProps,
+  IPlayerRootState
+> {
+  player: React.RefObject<HTMLVideoElement> = React.createRef()
+
+  state = {
+    isPlaying: false,
+  }
+
+  playPauseVideo = (): void => {
+    const { isPlaying } = this.state
+    // using typescript type narrowing with ! because we know current will already be defined here
+    const node = this.player.current!
+    isPlaying ? node.play() : node.pause()
+  }
+
+  togglePlayPause = () => {
+    this.setState(
+      {
+        isPlaying: !this.state.isPlaying,
+      },
+      this.playPauseVideo
+    )
+  }
+
   render() {
     const {
       videoUrl,
@@ -22,19 +52,28 @@ export class PlayerRoot extends React.Component<IPlayerRootProps> {
       next,
       autoPlay,
     } = this.props
+    const { isPlaying } = this.state
 
     return (
-      <video
-        controls
-        autoPlay={autoPlay}
-        height={height}
-        width={width}
-        src={videoUrl}
-        poster={posterUrl}
-        onEnded={next}
-      >
-        Sorry your browser doesn't support HTML5 videos!
-      </video>
+      <section>
+        <video
+          ref={this.player}
+          autoPlay={autoPlay}
+          height={height}
+          width={width}
+          src={videoUrl}
+          poster={posterUrl}
+          onEnded={next}
+        >
+          Sorry your browser doesn't support HTML5 videos!
+        </video>
+        <div>
+          <PlayPause
+            isPlaying={isPlaying}
+            togglePlayPause={this.togglePlayPause}
+          />
+        </div>
+      </section>
     )
   }
 }
