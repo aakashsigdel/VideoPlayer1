@@ -37,7 +37,7 @@ describe('<VideoPlayer />', () => {
     expect(wrapper.state().videos).toContainEqual(video)
   })
 
-  it('should not change the video if there is no videos on the list', () => {
+  it('should not got to next video if there is no videos on the list', () => {
     wrapper.setState({ videos: [] })
     const current = wrapper.state().currentVideo
     videoPlayer.next()
@@ -60,5 +60,26 @@ describe('<VideoPlayer />', () => {
     const current = wrapper.state().currentVideo
     videoPlayer.next()
     expect(wrapper.state().currentVideo).toBe(current + 1)
+  })
+
+  it('should not go to prev video if there is no videos on the list', () => {
+    wrapper.setState({ videos: [] })
+    const current = wrapper.state().currentVideo
+    videoPlayer.previous()
+    expect(wrapper.state().currentVideo).toBe(current)
+  })
+
+  it('should not go to prev video if current video is 0', () => {
+    wrapper.setState({ videos: getVideos(), currentVideo: 0 })
+    const current = wrapper.state().currentVideo
+    videoPlayer.previous()
+    expect(wrapper.state().currentVideo).toBe(current)
+  })
+
+  it('should go to prev video if current video is not 0', () => {
+    wrapper.setState({ videos: getVideos(), currentVideo: 1 })
+    const current = wrapper.state().currentVideo
+    videoPlayer.previous()
+    expect(wrapper.state().currentVideo).toBe(0)
   })
 })

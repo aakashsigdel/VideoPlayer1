@@ -1,13 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PlayerRoot /> should render correctly 1`] = `
-<video
-  controls={true}
-  height={500}
-  poster="testUrl"
-  src="testUrl"
-  width={620}
+<section
+  className="root"
 >
-  Sorry your browser doesn't support HTML5 videos!
-</video>
+  <video
+    className="video"
+    height={348}
+    onEnded={[MockFunction]}
+    poster="testUrl"
+    src="testUrl"
+    width={620}
+  >
+    Sorry your browser doesn't support HTML5 videos!
+  </video>
+  <div
+    className="overlay"
+  />
+  <div
+    className="controls"
+  >
+    <div
+      className="stationaryControls"
+    >
+      <div
+        onClick={[MockFunction]}
+      >
+        <svg
+          fill="#fff"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+        >
+          <path
+            d="M6 6h2v12H6zm3.5 6l8.5 6V6z"
+          />
+          <path
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+        </svg>
+      </div>
+      <div
+        onClick={[Function]}
+      >
+        <svg
+          fill="#fff"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+        >
+          <path
+            d="M8 5v14l11-7z"
+          />
+          <path
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+        </svg>
+      </div>
+      <div
+        onClick={[MockFunction]}
+      >
+        <svg
+          fill="#fff"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+        >
+          <path
+            d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"
+          />
+          <path
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
 `;
