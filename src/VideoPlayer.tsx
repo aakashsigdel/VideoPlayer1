@@ -51,6 +51,14 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     }
   }
 
+  previous = (): void => {
+    const { currentVideo, videos } = this.state
+    if (!videos.length || currentVideo - 1 < 0) {
+      return
+    }
+    this.setCurrentVideo(currentVideo - 1)
+  }
+
   next = (): void => {
     const { currentVideo, videos } = this.state
     this.setAutoPlay()
@@ -85,6 +93,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
         <PlayerRoot
           videoUrl={videos[currentVideo].videoUrl}
           next={this.next}
+          previous={this.previous}
           autoPlay={shouldAutoPlay}
         />
         <Playlist videos={videos} onClickAdd={this.openAddToPlaylist}>

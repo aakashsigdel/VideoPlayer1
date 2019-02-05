@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { PlayPause } from './PlayPause'
+import { NextPrevious } from './NextPrevious'
 
 export const DEFAULT_PLAYER_HEIGHT = 500
 export const DEFAULT_PLAYER_WIDTH = 620
@@ -13,7 +14,8 @@ export interface IPlayerRootProps {
   height?: number
   videoUrl: string
   posterUrl?: string
-  next?: () => void
+  next: () => void
+  previous: () => void
   autoPlay?: boolean
 }
 
@@ -50,6 +52,7 @@ export class PlayerRoot extends React.Component<
       height = DEFAULT_PLAYER_HEIGHT,
       width = DEFAULT_PLAYER_WIDTH,
       next,
+      previous,
       autoPlay,
     } = this.props
     const { isPlaying } = this.state
@@ -72,6 +75,8 @@ export class PlayerRoot extends React.Component<
             isPlaying={isPlaying}
             togglePlayPause={this.togglePlayPause}
           />
+          <NextPrevious type="next" onClick={next} />
+          <NextPrevious type="prev" onClick={previous} />
         </div>
       </section>
     )
