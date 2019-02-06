@@ -95,6 +95,9 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     } = this.state
     return (
       <main className={styles.root}>
+        <div className={styles.header}>
+          <h1>Video Player</h1>
+        </div>
         <section className={styles.container}>
           <PlayerRoot
             videoUrl={videos[currentVideo].videoUrl}

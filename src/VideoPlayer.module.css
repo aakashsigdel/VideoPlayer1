@@ -5,6 +5,12 @@
   justify-content: center;
   align-items: center;
   background: #f2f3f4;
+  padding-top: 64px;
+}
+
+.header {
+  position: absolute;
+  top: 30px;
 }
 
 .container {
