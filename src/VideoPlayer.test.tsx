@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { shallow, ShallowWrapper } from 'enzyme'
-import { create } from 'react-test-renderer'
 
 import { VideoPlayer, IVideoPlayerState } from './VideoPlayer'
 import { getVideos, getVideo } from './factory'
@@ -12,11 +11,6 @@ describe('<VideoPlayer />', () => {
   beforeEach(() => {
     wrapper = shallow(<VideoPlayer />)
     videoPlayer = wrapper.instance() as VideoPlayer
-  })
-
-  it('should render correctly', () => {
-    const tree = create(<VideoPlayer />).toJSON()
-    expect(tree).toMatchSnapshot()
   })
 
   it('should not set current video when setCurrentVideo is called with index greater than or equal to length of playlist', () => {

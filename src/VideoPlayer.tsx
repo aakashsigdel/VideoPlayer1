@@ -44,7 +44,6 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
   }
 
   componentDidUpdate() {
-    console.log('updating!!!')
     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
   }
 
@@ -117,7 +116,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
         </header>
         <section className={styles.container}>
           <PlayerRoot
-            videoUrl={videos[currentVideo].videoUrl}
+            videoUrl={videos[currentVideo] ? videos[currentVideo].videoUrl : ''}
             onPlay={this.setAutoPlay}
             next={this.next}
             previous={this.previous}

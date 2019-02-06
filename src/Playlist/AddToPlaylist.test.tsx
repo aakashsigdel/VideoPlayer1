@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { create } from 'react-test-renderer'
 import { shallow, ShallowWrapper } from 'enzyme'
 
 import {
@@ -7,6 +6,7 @@ import {
   IAddToPlaylistProps,
   IAddToPlaylistState,
 } from './AddToPlaylist'
+import { Button } from '../commons/Button'
 import { getVideo } from '../factory'
 
 describe('<AddToPlaylist />', () => {
@@ -20,13 +20,11 @@ describe('<AddToPlaylist />', () => {
     wrapper = shallow(<AddToPlaylist {...defaultProps} />)
   })
 
-  it('should render correctly', () => {
-    const tree = create(<AddToPlaylist {...defaultProps} />).toJSON()
-    expect(tree).toMatchSnapshot()
-  })
-
   it('should call onClickCancel on clicking cancel button', () => {
-    wrapper.find('button[type="button"]').simulate('click')
+    wrapper
+      .find(Button)
+      .first()
+      .simulate('click')
     expect(defaultProps.onClickCancel).toHaveBeenCalledTimes(1)
   })
 
