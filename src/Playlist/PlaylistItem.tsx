@@ -20,10 +20,5 @@ export const PlaylistItem: React.FunctionComponent<IPlaylistItemProps> = ({
     <span className={styles.number}>{videoNumber + 1}</span>
     <span className={cn(styles.title, styles.ellipsis)}>{video.title}</span>
     <span className={cn(styles.artist, styles.ellipsis)}>{video.artist}</span>
-    {false ? (
-      <Pause style={{ fill: 'black' }} />
-    ) : (
-      <Play style={{ fill: 'black' }} />
-    )}
   </li>
 )

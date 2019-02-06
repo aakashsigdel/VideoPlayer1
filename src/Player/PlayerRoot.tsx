@@ -86,7 +86,6 @@ export class PlayerRoot extends React.Component<
         >
           Sorry your browser doesn't support HTML5 videos!
         </video>
-        <div className={styles.overlay} />
         <div className={styles.controls}>
           <div className={styles.stationaryControls}>
             <NextPrevious type="prev" onClick={previous} />

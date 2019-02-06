@@ -39,7 +39,7 @@
 
 .number {
   flex: 1;
-  color: lightgray;
+  color: rgba(0, 0, 0, 0.35);
 }
 
 .title {
