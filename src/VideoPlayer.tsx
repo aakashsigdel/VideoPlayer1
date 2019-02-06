@@ -8,6 +8,7 @@ import { getVideos } from './factory'
 
 import styles from './VideoPlayer.module.css'
 
+const STORAGE_KEY = '@@videoApp##State'
 export interface IVideo {
   title: string
   artist: string
@@ -23,12 +24,28 @@ export interface IVideoPlayerState {
 }
 
 export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
-  state = {
-    videos: getVideos(), // TODO: change this
-    currentVideo: 0,
-    isOpenAddToPlaylist: false,
-    shouldAutoPlay: false,
-    playedOnce: false,
+  constructor(props: {}) {
+    super(props)
+    this.state = this.getSavedState()
+  }
+
+  getSavedState = (): IVideoPlayerState => {
+    const savedStateString = localStorage.getItem(STORAGE_KEY)
+    if (savedStateString) {
+      return JSON.parse(savedStateString) as IVideoPlayerState
+    }
+    return {
+      videos: getVideos(),
+      currentVideo: 0,
+      isOpenAddToPlaylist: false,
+      shouldAutoPlay: false,
+      playedOnce: false,
+    }
+  }
+
+  componentDidUpdate() {
+    console.log('updating!!!')
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state))
   }
 
   addVideo = (video: IVideo): void => {

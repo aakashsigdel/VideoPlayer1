@@ -49,6 +49,7 @@ export class AddToPlaylist extends React.Component<
         className={styles.dialog}
         overlayClassName={styles.overlay}
         shouldCloseOnOverlayClick={true}
+        ariaHideApp={false}
       >
         <section className={styles.root}>
           <header>
