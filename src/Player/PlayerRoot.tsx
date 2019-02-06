@@ -20,7 +20,8 @@ export interface IPlayerRootProps {
   posterUrl?: string
   next: () => void
   previous: () => void
-  autoPlay?: boolean
+  autoPlay: boolean
+  onPlay: () => void
 }
 
 export class PlayerRoot extends React.Component<
@@ -36,6 +37,7 @@ export class PlayerRoot extends React.Component<
 
   playPauseVideo = (): void => {
     const { isPlaying } = this.state
+    this.props.onPlay()
     // using typescript type narrowing with ! because we know current will already be defined here
     const node = this.player.current!
     isPlaying ? node.play() : node.pause()
@@ -59,14 +61,28 @@ export class PlayerRoot extends React.Component<
     }
   }
 
+  resetSeek = () => {
+    this.setState({
+      seek: 0,
+    })
+  }
+
+  handleNext = () => {
+    this.resetSeek()
+    this.props.next()
+  }
+
+  handlePrevious = () => {
+    this.resetSeek()
+    this.props.previous()
+  }
+
   render() {
     const {
       videoUrl,
       posterUrl,
       height = DEFAULT_PLAYER_HEIGHT,
       width = DEFAULT_PLAYER_WIDTH,
-      next,
-      previous,
       autoPlay,
     } = this.props
     const { isPlaying, seek } = this.state
@@ -75,24 +91,24 @@ export class PlayerRoot extends React.Component<
       <section className={styles.root}>
         <video
           ref={this.player}
-          autoPlay={autoPlay}
+          autoPlay={isPlaying && autoPlay}
           height={height}
           src={videoUrl}
           poster={posterUrl}
           onTimeUpdate={this.updateSeek}
-          onEnded={next}
+          onEnded={this.handleNext}
           className={styles.video}
         >
           Sorry your browser doesn't support HTML5 videos!
         </video>
         <div className={styles.controls}>
           <div className={styles.stationaryControls}>
-            <NextPrevious type="prev" onClick={previous} />
+            <NextPrevious type="prev" onClick={this.handlePrevious} />
             <PlayPause
               isPlaying={isPlaying}
               togglePlayPause={this.togglePlayPause}
             />
-            <NextPrevious type="next" onClick={next} />
+            <NextPrevious type="next" onClick={this.handleNext} />
           </div>
           <ProgressBar seek={seek} />
         </div>

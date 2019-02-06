@@ -18,6 +18,8 @@ describe('<PlayerRoot />', () => {
     posterUrl: 'testUrl',
     next: jest.fn(),
     previous: jest.fn(),
+    onPlay: jest.fn(),
+    autoPlay: true,
   }
 
   beforeEach(() => {
