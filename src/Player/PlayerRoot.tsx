@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { PlayPause } from './PlayPause'
 import { NextPrevious } from './NextPrevious'
+import { ProgressBar } from './ProgressBar'
 
 import styles from './PlayerRoot.module.css'
 
@@ -10,6 +11,7 @@ export const DEFAULT_PLAYER_WIDTH = 620
 
 export interface IPlayerRootState {
   isPlaying: boolean
+  seek: number
 }
 export interface IPlayerRootProps {
   width?: number
@@ -29,6 +31,7 @@ export class PlayerRoot extends React.Component<
 
   state = {
     isPlaying: false,
+    seek: 0,
   }
 
   playPauseVideo = (): void => {
@@ -47,6 +50,15 @@ export class PlayerRoot extends React.Component<
     )
   }
 
+  updateSeek = () => {
+    const node = this.player.current!
+    if (node.currentTime > 0) {
+      this.setState({
+        seek: Math.floor((100 / node.duration) * node.currentTime),
+      })
+    }
+  }
+
   render() {
     const {
       videoUrl,
@@ -57,7 +69,7 @@ export class PlayerRoot extends React.Component<
       previous,
       autoPlay,
     } = this.props
-    const { isPlaying } = this.state
+    const { isPlaying, seek } = this.state
 
     return (
       <section className={styles.root}>
@@ -68,6 +80,7 @@ export class PlayerRoot extends React.Component<
           width={width}
           src={videoUrl}
           poster={posterUrl}
+          onTimeUpdate={this.updateSeek}
           onEnded={next}
           className={styles.video}
         >
@@ -83,6 +96,7 @@ export class PlayerRoot extends React.Component<
             />
             <NextPrevious type="next" onClick={next} />
           </div>
+          <ProgressBar seek={seek} />
         </div>
       </section>
     )

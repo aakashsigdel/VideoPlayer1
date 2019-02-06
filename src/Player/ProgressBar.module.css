@@ -1,0 +1,9 @@
+.progressBar {
+  height: 15px;
+}
+.seek {
+  display: inline-block;
+  height: 2px;
+  background: red;
+  transition: width 200ms linear;
+}
