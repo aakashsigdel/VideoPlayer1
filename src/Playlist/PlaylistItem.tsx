@@ -17,7 +17,7 @@ export const PlaylistItem: React.FunctionComponent<IPlaylistItemProps> = ({
   onSelectVideo,
 }) => (
   <li onClick={() => onSelectVideo(videoNumber)} className={styles.listItem}>
-    <span className={styles.number}>{videoNumber}</span>
+    <span className={styles.number}>{videoNumber + 1}</span>
     <span className={cn(styles.title, styles.ellipsis)}>{video.title}</span>
     <span className={cn(styles.artist, styles.ellipsis)}>{video.artist}</span>
     {false ? (

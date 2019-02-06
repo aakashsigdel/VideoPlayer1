@@ -1,0 +1,59 @@
+.root {
+  width: 350px;
+  height: 348px;
+  margin: 0px 16px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.listHead {
+  display: flex;
+  padding: 0px 4px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.list {
+  padding: 0px;
+  margin: 0px;
+  height: 315px;
+  overflow-y: scroll;
+}
+
+.listItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+  width: 100%;
+  text-align: left;
+  padding: 10px 4px;
+  cursor: pointer;
+}
+
+.listItem:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.number {
+  flex: 1;
+  color: lightgray;
+}
+
+.title {
+  flex: 5;
+  padding-right: 2px;
+}
+
+.artist {
+  flex: 5;
+  padding-right: 2px;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

@@ -6,6 +6,8 @@ import { PlaylistItem } from './Playlist/PlaylistItem'
 import { AddToPlaylist } from './Playlist/AddToPlaylist'
 import { getVideos } from './factory'
 
+import styles from './VideoPlayer.module.css'
+
 export interface IVideo {
   title: string
   artist: string
@@ -89,23 +91,25 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
       isOpenAddToPlaylist,
     } = this.state
     return (
-      <main>
-        <PlayerRoot
-          videoUrl={videos[currentVideo].videoUrl}
-          next={this.next}
-          previous={this.previous}
-          autoPlay={shouldAutoPlay}
-        />
-        <Playlist videos={videos} onClickAdd={this.openAddToPlaylist}>
-          {(video, videoNumber) => (
-            <PlaylistItem
-              video={video}
-              videoNumber={videoNumber}
-              onSelectVideo={this.setCurrentVideo}
-              key={videoNumber}
-            />
-          )}
-        </Playlist>
+      <main className={styles.root}>
+        <section className={styles.container}>
+          <PlayerRoot
+            videoUrl={videos[currentVideo].videoUrl}
+            next={this.next}
+            previous={this.previous}
+            autoPlay={shouldAutoPlay}
+          />
+          <Playlist videos={videos} onClickAdd={this.openAddToPlaylist}>
+            {(video, videoNumber) => (
+              <PlaylistItem
+                video={video}
+                videoNumber={videoNumber}
+                onSelectVideo={this.setCurrentVideo}
+                key={videoNumber}
+              />
+            )}
+          </Playlist>
+        </section>
         {isOpenAddToPlaylist && (
           <AddToPlaylist
             onClickAdd={this.addVideo}
