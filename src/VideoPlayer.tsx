@@ -95,9 +95,9 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     } = this.state
     return (
       <main className={styles.root}>
-        <div className={styles.header}>
+        <header className={styles.header}>
           <h1>Video Player</h1>
-        </div>
+        </header>
         <section className={styles.container}>
           <PlayerRoot
             videoUrl={videos[currentVideo].videoUrl}
@@ -113,6 +113,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
                 videoNumber={videoNumber}
                 onSelectVideo={this.setCurrentVideo}
                 key={videoNumber}
+                nowPlaying={videoNumber === currentVideo}
               />
             )}
           </Playlist>

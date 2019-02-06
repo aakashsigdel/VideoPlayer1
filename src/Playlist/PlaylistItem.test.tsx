@@ -11,6 +11,7 @@ describe('<PlaylistItem />', () => {
     video: getVideo(),
     videoNumber: 0,
     onSelectVideo: jest.fn(),
+    nowPlaying: true,
   }
   beforeEach(() => {
     wrapper = shallow(<PlaylistItem {...defaultProps} />)

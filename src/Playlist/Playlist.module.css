@@ -71,3 +71,7 @@
 .button {
   margin: 0px;
 }
+
+.nowPlaying {
+  color: green;
+}
