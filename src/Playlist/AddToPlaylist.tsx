@@ -1,6 +1,11 @@
 import * as React from 'react'
+import Dialog from 'react-modal'
 
 import { IVideo } from '../VideoPlayer'
+import { Button } from '../commons/Button'
+import { TextField } from '../commons/TextField'
+
+import styles from './AddToPlaylist.module.css'
 
 export interface IAddToPlaylistState extends IVideo {}
 
@@ -37,40 +42,46 @@ export class AddToPlaylist extends React.Component<
   render() {
     const { onClickAdd, onClickCancel } = this.props
     return (
-      <section>
-        <header>
-          <h2>Add to Playlist</h2>
-        </header>
-        <form onSubmit={this.handleOnSubmit}>
-          <label htmlFor="artist">Artist</label>
-          <input
-            type="text"
-            id="artist"
-            onChange={this.handleOnChage('artist')}
-            required
-          />
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            id="title"
-            onChange={this.handleOnChage('title')}
-            required
-          />
-          <label htmlFor="videoUrl">Video URL</label>
-          <input
-            type="url"
-            id="videoUrl"
-            onChange={this.handleOnChage('videoUrl')}
-            required
-          />
-          <footer>
-            <button type="button" onClick={onClickCancel}>
-              Cancel
-            </button>
-            <button type="submit">Add</button>
-          </footer>
-        </form>
-      </section>
+      <Dialog
+        isOpen={true}
+        onRequestClose={onClickCancel}
+        contentLabel="Example Modal"
+        className={styles.dialog}
+        overlayClassName={styles.overlay}
+        shouldCloseOnOverlayClick={true}
+      >
+        <section className={styles.root}>
+          <header>
+            <h2>Add to Playlist</h2>
+          </header>
+          <form onSubmit={this.handleOnSubmit} className={styles.form}>
+            <div className={styles.formContent}>
+              <TextField
+                label="Artist"
+                type="text"
+                id="artist"
+                onChange={this.handleOnChage('artist')}
+              />
+              <TextField
+                label="Title"
+                type="text"
+                id="title"
+                onChange={this.handleOnChage('title')}
+              />
+              <TextField
+                label="Video URL"
+                type="url"
+                id="videoUrl"
+                onChange={this.handleOnChage('videoUrl')}
+              />
+            </div>
+            <footer className={styles.footer}>
+              <Button type="button" onClick={onClickCancel} label="Cancel" />
+              <Button type="submit" label="Add" />
+            </footer>
+          </form>
+        </section>
+      </Dialog>
     )
   }
 }

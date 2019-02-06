@@ -1,0 +1,12 @@
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.input {
+  height: 30px;
+  padding: 0px 4px;
+  margin-top: 4px;
+}
+
