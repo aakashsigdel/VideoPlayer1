@@ -22,7 +22,11 @@ export const Playlist: React.FunctionComponent<IPlaylistProps> = ({
       <span className={styles.title}>Title</span>
       <span className={styles.artist}>Artist</span>
     </div>
-    <ul className={styles.list}>{videos.map(children)}</ul>
+    <ul className={styles.list}>
+      {videos.map(children)}
+      {videos.map(children)}
+      {videos.map(children)}
+    </ul>
     <Button
       onClick={onClickAdd}
       label="Add to playlist"

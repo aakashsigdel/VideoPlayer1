@@ -6,8 +6,8 @@ import { ProgressBar } from './ProgressBar'
 
 import styles from './PlayerRoot.module.css'
 
-export const DEFAULT_PLAYER_HEIGHT = 348
-export const DEFAULT_PLAYER_WIDTH = 620
+export const DEFAULT_PLAYER_HEIGHT = 338
+export const DEFAULT_PLAYER_WIDTH = 600
 
 export interface IPlayerRootState {
   isPlaying: boolean
@@ -77,7 +77,6 @@ export class PlayerRoot extends React.Component<
           ref={this.player}
           autoPlay={autoPlay}
           height={height}
-          width={width}
           src={videoUrl}
           poster={posterUrl}
           onTimeUpdate={this.updateSeek}
