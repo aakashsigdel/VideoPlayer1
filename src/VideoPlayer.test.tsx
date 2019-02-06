@@ -37,6 +37,12 @@ describe('<VideoPlayer />', () => {
     expect(wrapper.state().videos).toContainEqual(video)
   })
 
+  it('should close add to playlist dialog when addVideo is called', () => {
+    const video = getVideo()
+    videoPlayer.addVideo(video)
+    expect(wrapper.state().isOpenAddToPlaylist).toBeFalsy()
+  })
+
   it('should not got to next video if there is no videos on the list', () => {
     wrapper.setState({ videos: [] })
     const current = wrapper.state().currentVideo

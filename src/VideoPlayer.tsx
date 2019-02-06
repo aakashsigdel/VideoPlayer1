@@ -32,6 +32,7 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
   addVideo = (video: IVideo): void => {
     this.setState({
       videos: [...this.state.videos, video],
+      isOpenAddToPlaylist: false,
     })
   }
 
