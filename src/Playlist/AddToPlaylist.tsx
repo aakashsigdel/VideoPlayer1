@@ -76,8 +76,13 @@ export class AddToPlaylist extends React.Component<
               />
             </div>
             <footer className={styles.footer}>
-              <Button type="button" onClick={onClickCancel} label="Cancel" />
-              <Button type="submit" label="Add" />
+              <Button
+                type="button"
+                onClick={onClickCancel}
+                label="Cancel"
+                variant="raised"
+              />
+              <Button type="submit" label="Add" variant="raised" />
             </footer>
           </form>
         </section>

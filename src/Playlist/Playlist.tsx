@@ -1,6 +1,8 @@
 import * as React from 'react'
 
 import { IVideo } from '../VideoPlayer'
+import { Button } from '../commons/Button'
+
 import styles from './Playlist.module.css'
 
 export interface IPlaylistProps {
@@ -21,6 +23,12 @@ export const Playlist: React.FunctionComponent<IPlaylistProps> = ({
       <span className={styles.artist}>Artist</span>
     </div>
     <ul className={styles.list}>{videos.map(children)}</ul>
-    <button onClick={onClickAdd}>Add to playlist</button>
+    <Button
+      onClick={onClickAdd}
+      label="Add to playlist"
+      variant="raised"
+      type="button"
+      className={styles.button}
+    />
   </section>
 )

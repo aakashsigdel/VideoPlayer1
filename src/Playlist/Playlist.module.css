@@ -1,6 +1,8 @@
 .root {
   width: 350px;
   height: 348px;
+  display: flex;
+  flex-direction: column;
   margin: 0px 16px;
   font-size: 12px;
   font-weight: bold;
@@ -16,8 +18,8 @@
 
 .list {
   padding: 0px;
-  margin: 0px;
-  height: 315px;
+  margin: 0px 0px 10px;
+  height: 300px;
   overflow-y: scroll;
 }
 
@@ -56,4 +58,8 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.button {
+  margin: 0px;
 }
