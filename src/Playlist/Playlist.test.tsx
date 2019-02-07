@@ -10,7 +10,7 @@ describe('<Playlist />', () => {
   const defaultProps: IPlaylistProps = {
     videos: getVideos(),
     onClickAdd: jest.fn(),
-    children: (s, k) => <div key={k} />,
+    render: (s, k) => <div key={k} />,
   }
 
   beforeEach(() => {

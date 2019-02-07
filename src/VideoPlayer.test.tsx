@@ -104,4 +104,13 @@ describe('<VideoPlayer />', () => {
     videoPlayer.closeAddToPlaylist()
     expect(wrapper.state().isOpenAddToPlaylist).toBeFalsy()
   })
+
+  it('should return a PlaylistItem when renderPlaylistItem is called', () => {
+    const video = getVideo()
+    const playlistItem = videoPlayer.renderPlaylistItem(video, 0)
+    wrapper.setState({ currentVideo: 0 })
+    expect(playlistItem.props.video).toEqual(video)
+    expect(playlistItem.props.videoNumber).toEqual(0)
+    expect(playlistItem.props.nowPlaying).toBeTruthy()
+  })
 })

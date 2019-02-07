@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextField /> should render correctly 1`] = `
+<div
+  className="inputContainer"
+>
+  <label
+    htmlFor="test"
+  >
+    testLabel
+  </label>
+  <input
+    className="input"
+    id="test"
+    onChange={[MockFunction]}
+    required={true}
+    type="text"
+  />
+</div>
+`;

@@ -3,7 +3,7 @@ import cn from 'classnames'
 
 import styles from './Button.module.css'
 
-interface IButtonProps {
+export interface IButtonProps {
   type: 'button' | 'submit'
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   label: string

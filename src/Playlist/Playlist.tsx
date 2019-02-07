@@ -7,13 +7,13 @@ import styles from './Playlist.module.css'
 
 export interface IPlaylistProps {
   videos: IVideo[]
-  children: (video: IVideo, videoNumber: number) => JSX.Element
+  render: (video: IVideo, videoNumber: number) => JSX.Element
   onClickAdd: () => void
 }
 
 export const Playlist: React.FunctionComponent<IPlaylistProps> = ({
   videos,
-  children,
+  render,
   onClickAdd,
 }) => (
   <section className={styles.root}>
@@ -22,7 +22,7 @@ export const Playlist: React.FunctionComponent<IPlaylistProps> = ({
       <span className={styles.title}>Title</span>
       <span className={styles.artist}>Artist</span>
     </div>
-    <ul className={styles.list}>{videos.map(children)}</ul>
+    <ul className={styles.list}>{videos.map(render)}</ul>
     <Button
       onClick={onClickAdd}
       label="Add to playlist"

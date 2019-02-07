@@ -102,6 +102,18 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
     })
   }
 
+  renderPlaylistItem = (video: IVideo, videoNumber: number): JSX.Element => {
+    return (
+      <PlaylistItem
+        video={video}
+        videoNumber={videoNumber}
+        onSelectVideo={this.setCurrentVideo}
+        key={videoNumber}
+        nowPlaying={videoNumber === this.state.currentVideo}
+      />
+    )
+  }
+
   render() {
     const {
       videos,
@@ -122,17 +134,11 @@ export class VideoPlayer extends React.Component<{}, IVideoPlayerState> {
             previous={this.previous}
             autoPlay={shouldAutoPlay}
           />
-          <Playlist videos={videos} onClickAdd={this.openAddToPlaylist}>
-            {(video, videoNumber) => (
-              <PlaylistItem
-                video={video}
-                videoNumber={videoNumber}
-                onSelectVideo={this.setCurrentVideo}
-                key={videoNumber}
-                nowPlaying={videoNumber === currentVideo}
-              />
-            )}
-          </Playlist>
+          <Playlist
+            videos={videos}
+            onClickAdd={this.openAddToPlaylist}
+            render={this.renderPlaylistItem}
+          />
         </section>
         {isOpenAddToPlaylist && (
           <AddToPlaylist

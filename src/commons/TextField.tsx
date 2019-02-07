@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import styles from './TextField.module.css'
 
-interface ITextFieldProps {
+export interface ITextFieldProps {
   id: string
   label: string
   type: 'text' | 'url'
