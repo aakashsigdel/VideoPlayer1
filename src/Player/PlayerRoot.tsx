@@ -50,11 +50,15 @@ export class PlayerRoot extends React.Component<
     )
   }
 
+  calculateSeek = (currentTime: number, duration: number) => {
+    return Math.floor((100 / duration) * currentTime)
+  }
+
   updateSeek = () => {
     const node = this.player.current!
     if (node.currentTime > 0) {
       this.setState({
-        seek: Math.floor((100 / node.duration) * node.currentTime),
+        seek: this.calculateSeek(node.currentTime, node.duration),
       })
     }
   }

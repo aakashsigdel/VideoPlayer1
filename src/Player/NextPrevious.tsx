@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Next, Previous } from '../icons'
 
-interface INextPreviousProps {
+export interface INextPreviousProps {
   type: 'next' | 'prev'
   onClick: () => void
 }
