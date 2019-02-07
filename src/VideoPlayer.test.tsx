@@ -2,6 +2,8 @@ import * as React from 'react'
 import { shallow, ShallowWrapper } from 'enzyme'
 
 import { VideoPlayer, IVideoPlayerState } from './VideoPlayer'
+import { PlaylistItem } from './Playlist/PlaylistItem'
+import { Playlist } from './Playlist/Playlist'
 import { getVideos, getVideo } from './factory'
 
 describe('<VideoPlayer />', () => {
@@ -11,6 +13,16 @@ describe('<VideoPlayer />', () => {
   beforeEach(() => {
     wrapper = shallow(<VideoPlayer />)
     videoPlayer = wrapper.instance() as VideoPlayer
+  })
+
+  it('should set shouldAutoPlay when shouldAutoPlay and playedOnce is false', () => {
+    videoPlayer.setAutoPlay()
+    expect(wrapper.state().shouldAutoPlay).toBeTruthy()
+  })
+
+  it('should set playedOnce when shouldAutoPlay and playedOnce is false', () => {
+    videoPlayer.setAutoPlay()
+    expect(wrapper.state().playedOnce).toBeTruthy()
   })
 
   it('should not set current video when setCurrentVideo is called with index greater than or equal to length of playlist', () => {
@@ -81,5 +93,15 @@ describe('<VideoPlayer />', () => {
     const current = wrapper.state().currentVideo
     videoPlayer.previous()
     expect(wrapper.state().currentVideo).toBe(0)
+  })
+
+  it('should set isOpenAddToPlaylist to true', () => {
+    videoPlayer.openAddToPlaylist()
+    expect(wrapper.state().isOpenAddToPlaylist).toBeTruthy()
+  })
+
+  it('should set isOpenAddToPlaylist to false', () => {
+    videoPlayer.closeAddToPlaylist()
+    expect(wrapper.state().isOpenAddToPlaylist).toBeFalsy()
   })
 })
