@@ -1,12 +1,13 @@
 version: 2
 
-jobs:
-  build-app:
+build-app: &build-app
     docker:
       - image: circleci/node:10
     working_directory: ~/VideoPlayer
 
+jobs:
   install:
+    <<: *build-app
     steps:
       - checkout
       - restore_cache:
@@ -31,6 +32,9 @@ workflows:
   version: 2
   install-and-test:
     jobs:
-      - build-app
       - install
+        requires:
+          - build-app
       - test
+        requires:
+          - install
