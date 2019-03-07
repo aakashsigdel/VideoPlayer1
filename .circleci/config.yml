@@ -1,40 +1,57 @@
-version: 2
+version: 2.1
 
-build-app: &build-app
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/VideoPlayer
+orbs:
+  heroku: freighthub/heroku@volatile
+
+docker_defaults: &docker_defaults
+  docker:
+    - image: circleci/node:10
+  working_directory: ~/VideoPlayer
+
+restore_cache: &restore_cache
+  restore_cache:
+    keys:
+      - v1-dependencies-{{ checksum "package.json" }}
+      # fallback to using the latest cache if no exact match is found
+      - v1-dependencies-
+
+install_steps: &install_steps
+  steps:
+    - checkout
+    - *restore_cache
+    - run: yarn install
+    - run: yarn build --production
 
 jobs:
   install:
-    <<: *build-app
+    <<: *docker_defaults
+    <<: *install_steps
+  pushcdn:
+    <<: *docker_defaults
+    <<: *install_steps
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-  test:
-    steps:
-        # run tests!
-        - run: yarn test
+      - run: yarn pushcdn
 
 workflows:
   version: 2
-  install-and-test:
+  install-and-build:
     jobs:
       - install
-        requires:
-          - build-app
-      - test
-        requires:
-          - install
+      - pushcdn:
+          requires:
+            - install
+          filters:
+            branches:
+              only:
+                - master
+      - heroku/deploy:
+          name: heroku/videoplayeraakash
+          herokuApp: videoplayeraakash
+          sshKey: $HEROKU_SSH_KEY
+          context: heroku
+          requires:
+            - pushcdn
+          filters:
+            branches:
+              only:
+                - master
