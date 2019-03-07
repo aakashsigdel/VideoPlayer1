@@ -40,14 +40,22 @@ workflows:
   install-and-build:
     jobs:
       - install
-      - build
+      - build:
           requires:
             - install
-      - pushcdn
+      - pushcdn:
           requires:
             - build
-      - deploy
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
           requires:
             - pushcdn
+          filters:
+            branches:
+              only:
+                - master
 
 
