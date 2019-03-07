@@ -1,40 +1,53 @@
-version: 2
+version: 2.1
 
-build-app: &build-app
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/VideoPlayer
+docker_defaults: &docker_defaults
+  docker:
+    - image: circleci/node:10
+  working_directory: ~/repo
+
+restore_cache: &restore_cache
+  restore_cache:
+    keys:
+      - v1-dependencies-{{ checksum "package.json" }}
+      # fallback to using the latest cache if no exact match is found
+      - v1-dependencies-
+
+install_steps: &install_steps
+  - checkout
+  - *restore_cache
+  - run: yarn install
 
 jobs:
   install:
-    <<: *build-app
+    <<: *docker_defaults
+    <<: *install_steps
+  build:
+    <<: *docker_defaults
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-
-      - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-  test:
+      - run: yarn build --production
+  pushcdn:
+    <<: *docker_defaults
     steps:
-        # run tests!
-        - run: yarn test
+      - run: yarn pushcdn
+  deploy:
+    <<: *docker_defaults
+    steps:
+      - run: yarn deploy
+
 
 workflows:
   version: 2
-  install-and-test:
+  install-and-build:
     jobs:
       - install
-        requires:
-          - build-app
-      - test
-        requires:
-          - install
+      - build
+          requires:
+            - install
+      - pushcdn
+          requires:
+            - build
+      - deploy
+          requires:
+            - pushcdn
+
+
