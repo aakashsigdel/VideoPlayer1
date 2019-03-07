@@ -13,9 +13,10 @@ restore_cache: &restore_cache
       - v1-dependencies-
 
 install_steps: &install_steps
-  - checkout
-  - *restore_cache
-  - run: yarn install
+  steps:
+    - checkout
+    - *restore_cache
+    - run: yarn install
 
 jobs:
   install:
@@ -33,7 +34,6 @@ jobs:
     <<: *docker_defaults
     steps:
       - run: yarn deploy
-
 
 workflows:
   version: 2
@@ -57,5 +57,3 @@ workflows:
             branches:
               only:
                 - master
-
-
