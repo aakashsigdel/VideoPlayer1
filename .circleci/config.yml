@@ -1,0 +1,36 @@
+version: 2
+
+jobs:
+  build-app:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/VideoPlayer
+
+  install:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+  test:
+    steps:
+        # run tests!
+        - run: yarn test
+
+workflows:
+  version: 2
+  install-and-test:
+    jobs:
+      - build-app
+      - install
+      - test
