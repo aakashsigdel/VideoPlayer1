@@ -3,7 +3,7 @@ version: 2.1
 docker_defaults: &docker_defaults
   docker:
     - image: circleci/node:10
-  working_directory: ~/repo
+  working_directory: ~/VideoPlayer
 
 restore_cache: &restore_cache
   restore_cache:
