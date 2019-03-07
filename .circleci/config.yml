@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  heroku: freighthub/heroku@volatile
+
 docker_defaults: &docker_defaults
   docker:
     - image: circleci/node:10
@@ -17,40 +20,35 @@ install_steps: &install_steps
     - checkout
     - *restore_cache
     - run: yarn install
+    - run: yarn build --production
 
 jobs:
   install:
     <<: *docker_defaults
     <<: *install_steps
-  build:
-    <<: *docker_defaults
-    steps:
-      - run: yarn build --production
   pushcdn:
     <<: *docker_defaults
+    <<: *install_steps
     steps:
       - run: yarn pushcdn
-  deploy:
-    <<: *docker_defaults
-    steps:
-      - run: yarn deploy
 
 workflows:
   version: 2
   install-and-build:
     jobs:
       - install
-      - build:
-          requires:
-            - install
       - pushcdn:
           requires:
-            - build
+            - install
           filters:
             branches:
               only:
                 - master
-      - deploy:
+      - heroku/deploy:
+          name: heroku/videoplayeraakash
+          herokuApp: videoplayeraakash
+          sshKey: $HEROKU_SSH_KEY
+          context: heroku
           requires:
             - pushcdn
           filters:
